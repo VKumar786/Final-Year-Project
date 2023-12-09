@@ -18,3 +18,5 @@ conda install pyopengl
 # Deployment
 
 > pipreqs --encoding=utf8
+
+`Hosted online using Github + Render`
