@@ -12,6 +12,8 @@ Original file is located at
 import pickle
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestClassifier 
+from sklearn.ensemble import RandomForestRegressor 
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn import svm
@@ -71,9 +73,11 @@ print(x.shape, x_train.shape, x_test.shape)
 """> Training model"""
 
 classifier = svm.SVC(kernel='linear')
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
 
 # training support vector machine
 classifier.fit(x_train, y_train)
+clf.fit(X_train, y_train)
 
 """> Model Evaluation | Accuracy Score"""
 
@@ -84,6 +88,7 @@ training_data_accuracy = accuracy_score(x_train_prediction, y_train)
 print(training_data_accuracy)
 
 x_test_prediction = classifier.predict(x_test)
+predictions = clf.predict(X_test)
 testing_data_accuracy = accuracy_score(x_test_prediction, y_test)
 
 # Accuracy score of testing data
