@@ -42,14 +42,35 @@ def main():
     # getting input data from user
  	# Pregnancies, Glucose, BloodPressure, SkinThickness,	Insulin, BMI, DiabetesPedigreeFunction, Age 	
     
-    Pregnancies = st.text_input("Number of Pregnancies")
-    Glucose = st.text_input("Glucose Level")
-    BloodPressure = st.text_input("Blood Pressure Value")
-    SkinThickness = st.text_input("Skin Thickness Value")
-    Insulin = st.text_input("Insulin Level")
-    BMI = st.text_input("BMI Value")
-    DiabetesPedigreeFunction = st.text_input("Diabetes Pedigree Function value")
-    Age = st.text_input("Age of Person")
+    # Dropdown menu for gender selection
+    gender = st.selectbox("Select Gender", ["Male", "Female"])
+
+    Pregnancies = 0
+    # Set number of pregnancies based on gender selection
+    if gender == "Male":
+        Pregnancies = 0
+    else:
+        Pregnancies = st.number_input("Number of Pregnancies", min_value=0, max_value=1000, step=1)
+
+    Glucose = st.number_input("Glucose Level (0 to 200)", min_value=0, max_value=200, step=1)
+    BloodPressure = st.number_input("Blood Pressure Value (0 to 200)", min_value=0, max_value=200, step=1)
+    SkinThickness = st.number_input("Skin Thickness Value (0 to 100)", min_value=0, max_value=100, step=1)
+    Insulin = st.number_input("Insulin Level (0 to 500)", min_value=0, max_value=500, step=1)
+
+    # BMI
+    # BMI = st.text_input("BMI Value")
+
+    # Get weight and height inputs from user
+    weight = st.number_input("Enter Weight (kg)", min_value=0.0, step=0.1)
+    height = st.number_input("Enter Height (m)", min_value=0.0, step=0.01)
+    BMI = 0
+
+    # Calculate BMI
+    if weight > 0 and height > 0:
+        BMI = weight / (height ** 2)
+
+    DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function value (0 to 5)", min_value=0.00, max_value=5.00, step=0.01)
+    Age = st.number_input("Age of Person (0 to 120)", min_value=0, max_value=120, step=1)
     
     
     # code for x
@@ -61,42 +82,9 @@ def main():
     
     if diagnosis == "Person is diabetic":
         st.success(diagnosis)
-    else:
+    elif diagnosis == "Person is not diabetic":
         st.error(diagnosis)
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
