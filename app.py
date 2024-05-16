@@ -6,6 +6,7 @@ Created on Sun Dec 10 01:46:24 2023
 @author: bakru_k78
 """
 
+import pandas as pd
 import numpy as np
 import pickle
 import streamlit as st
@@ -14,9 +15,9 @@ import streamlit as st
 # loaded_model = pickle.load(open("/home/bakru_k78/VsCodeProject/Final-Year-Project/trained_model.sav", "rb"))
 loaded_model = pickle.load(open("trained_model.sav", "rb"))
 
+heading_color = '#FF4B4B';
+
 # function for prediction
-
-
 def diabetes_prediction(input_data):
     # input_data = (0,137,40,35,168,43.1,2.288,33)
 
@@ -40,7 +41,11 @@ def diabetes_prediction(input_data):
 def display_main_app():
 
     # Giving a title
-    st.title("Diabetes Prediction Web App")
+    # st.title("Diabetes Prediction 😎")
+    st.markdown(
+        f"<h1 style='color: {heading_color};'>Diabetes Prediction 😎</h1>",
+        unsafe_allow_html=True
+    )
 
     # getting input data from user
     # Pregnancies, Glucose, BloodPressure, SkinThickness,	Insulin, BMI, DiabetesPedigreeFunction, Age
@@ -96,44 +101,56 @@ def display_main_app():
         st.error(diagnosis)
 
 
-def display_understanding_diabetes_tab():
+def display_information_tab():
     # Colorful heading
     st.markdown(
-        "<h1 style='color: #FF4B4B;'>Diabetes Prediction Information</h1>",
+        f"<h1 style='color: {heading_color};'>Diabetes Prediction Information</h1>",
         unsafe_allow_html=True
     )
 
     st.subheader("Pregnancies:")
-    st.text("This represents the number of pregnancies the individual has had.")
+    st.write("This represents the number of pregnancies the individual has had.")
 
     st.subheader("Glucose Level:")
-    st.text("The concentration of glucose in the blood. It is measured in mg/dL.")
+    st.write("The concentration of glucose in the blood. It is measured in mg/dL. Normal range: 70-99 mg/dL.")
+    st.write("Medical Fact: Glucose is the primary source of energy for the body's cells, and maintaining a stable glucose level is essential for overall health.")
 
     st.subheader("Blood Pressure Value:")
-    st.text(
-        "The blood pressure of the individual. It is measured in mmHg (millimeters of mercury).")
+    st.write(
+        "The blood pressure of the individual. It is measured in mmHg (millimeters of mercury). Normal range: 90/60 mmHg to 120/80 mmHg.")
+    st.write("Medical Fact: Blood pressure measures the force of blood against the walls of the arteries. High blood pressure can lead to cardiovascular diseases.")
 
     st.subheader("Skin Thickness Value:")
-    st.text("The thickness of skin folds on the triceps. It is measured in mm.")
+    st.write("The thickness of skin folds on the triceps. It is measured in mm.")
+    st.write("Medical Fact: Skin thickness measurements can provide insight into an individual's body composition and risk factors for certain health conditions.")
 
     st.subheader("Insulin Level:")
-    st.text("The insulin level in the blood. It is measured in units/mL.")
+    st.write("The insulin level in the blood. It is measured in units/mL.")
+    st.write("Medical Fact: Insulin is a hormone that regulates blood sugar levels. Insufficient insulin production or insulin resistance can lead to diabetes.")
 
     st.subheader("BMI (Body Mass Index):")
-    st.text("BMI is a measure of body fat based on height and weight. It is calculated by dividing weight in kilograms by the square of height in meters. BMI indicates whether an individual is underweight, normal weight, overweight, or obese.")
+    st.write("BMI is a measure of body fat based on height and weight. It is calculated by dividing weight in kilograms by the square of height in meters. BMI indicates whether an individual is underweight, normal weight, overweight, or obese.")
     st.code("BMI = weight (kg) / (height (m) ** 2)")
+    st.write("BMI Categories and Health Risks:")
+    st.write("- Underweight: BMI < 18.5")
+    st.write("- Normal weight: 18.5 ≤ BMI < 25")
+    st.write("- Overweight: 25 ≤ BMI < 30")
+    st.write("- Obesity: BMI ≥ 30")
+    st.write("BMI values outside the normal range may indicate increased health risks, including diabetes.")
 
     st.subheader("Diabetes Pedigree Function:")
-    st.text(
+    st.write(
         "A function that scores the likelihood of diabetes based on family history.")
     st.code("DPF = sum of diabetes cases in relatives / total number of relatives")
 
     st.subheader("Age of Person:")
-    st.text("The age of the individual in years.")
-
+    st.write("The age of the individual in years.")
 
 def display_about_tab():
-    st.header("Welcome to the Diabetes Prediction Web Application! 👋")
+    st.markdown(
+        f"<h1 style='color: {heading_color};'>Welcome to the Diabetes Prediction Web Application! 👋</h1>",
+        unsafe_allow_html=True
+    )
 
     st.markdown(
         """
@@ -185,11 +202,11 @@ def display_about_tab():
 if __name__ == "__main__":
     st.sidebar.title("Navigation")
     selection = st.sidebar.radio(
-        "Go to", ["Main App", "Understanding Diabetes", "About"])
+        "Go to", ["Main App", "Information", "About"])
 
     if selection == "Main App":
-        display_about_tab()
-    elif selection == "Understanding Diabetes":
-        display_understanding_diabetes_tab()
-    elif selection == "About":
         display_main_app()
+    elif selection == "Information":
+        display_information_tab()
+    elif selection == "About":
+        display_about_tab()
