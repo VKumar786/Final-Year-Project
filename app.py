@@ -34,7 +34,8 @@ def diabetes_prediction(input_data):
     else:
         return "Person is diabetic"
 
-def main():
+
+def display_main_app():
     
     # Giving a title
     st.title("Diabetes Prediction Web App")
@@ -85,6 +86,71 @@ def main():
     elif diagnosis == "Person is not diabetic":
         st.error(diagnosis)
 
-if __name__ == "__main__":
-    main()
 
+def display_understanding_diabetes_tab():
+    # Colorful heading
+    st.markdown(
+        "<h1 style='color: #FF4B4B;'>Diabetes Prediction Information</h1>", 
+        unsafe_allow_html=True
+    )
+
+    st.subheader("Pregnancies:")
+    st.text("This represents the number of pregnancies the individual has had.")
+
+    st.subheader("Glucose Level:")
+    st.text("The concentration of glucose in the blood. It is measured in mg/dL.")
+
+    st.subheader("Blood Pressure Value:")
+    st.text(
+        "The blood pressure of the individual. It is measured in mmHg (millimeters of mercury).")
+
+    st.subheader("Skin Thickness Value:")
+    st.text("The thickness of skin folds on the triceps. It is measured in mm.")
+
+    st.subheader("Insulin Level:")
+    st.text("The insulin level in the blood. It is measured in units/mL.")
+
+    st.subheader("BMI (Body Mass Index):")
+    st.text("BMI is a measure of body fat based on height and weight. It is calculated by dividing weight in kilograms by the square of height in meters. BMI indicates whether an individual is underweight, normal weight, overweight, or obese.")
+    st.code("BMI = weight (kg) / (height (m) ** 2)")
+
+    st.subheader("Diabetes Pedigree Function:")
+    st.text(
+        "A function that scores the likelihood of diabetes based on family history.")
+    st.code("DPF = sum of diabetes cases in relatives / total number of relatives")
+
+    st.subheader("Age of Person:")
+    st.text("The age of the individual in years.")
+    
+def display_about_tab():
+    st.header("Welcome to the Diabetes Prediction Web Application! 👋")
+
+    st.markdown(
+        """
+        This application serves a dual purpose, benefiting both healthcare professionals and users alike.
+
+        **For Doctors:**
+        - Quickly obtain preliminary results for diabetes diagnosis.
+        - Enhance diagnostic accuracy through a two-step verification process.
+        - Streamline testing procedures for improved patient care.
+
+        **For Users:**
+        - Conveniently monitor health status from anywhere.
+        - Receive instant feedback on likelihood of having diabetes.
+        - Empower proactive health management and informed decision-making.
+
+        With its user-friendly interface and powerful predictive capabilities, the Diabetes Prediction Web Application aims to improve healthcare outcomes, enhance patient engagement, and contribute towards a healthier future for all.
+        """
+    )
+    
+if __name__ == "__main__":
+    st.sidebar.title("Navigation")
+    selection = st.sidebar.radio(
+        "Go to", ["Main App", "Understanding Diabetes", "About"])
+
+    if selection == "Main App":
+        display_main_app()
+    elif selection == "Understanding Diabetes":
+        display_understanding_diabetes_tab()
+    elif selection == "About":
+        display_about_tab()
