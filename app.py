@@ -75,7 +75,7 @@ def display_main_app():
 
     # Get weight and height inputs from user
     weight = st.number_input("Enter Weight (kg)", min_value=0.0, step=0.1)
-    height = st.number_input("Enter Height (m)", min_value=0.0, step=0.01)
+    height = st.number_input("Enter Height (cm)", min_value=0.0, step=0.01) / 100
     BMI = 0
 
     # Calculate BMI
